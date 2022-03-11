@@ -10,7 +10,7 @@ function App() {
          <ProfileContent />
        </AuthenticatedTemplate>
        <UnauthenticatedTemplate>
-         <p>You are not signed in! Please sign in.</p>
+         <p>Please sign in to get started.</p>
        </UnauthenticatedTemplate>
     </PageLayout>
   );

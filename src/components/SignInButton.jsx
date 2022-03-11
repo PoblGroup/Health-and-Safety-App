@@ -14,7 +14,7 @@ const SignInButton = () => {
 
     return (
         <Button variant="light" className="ml-auto" onClick={() => handleLogin(instance)}>
-            Sign In using Popup
+            Sign In
         </Button>
     )
 }

@@ -12,11 +12,15 @@ export const msalconfig = {
 
 // Add scopes to be used at Microsoft identity platform endpoints
 export const loginRequest = {
-    scopes: ["User.Read"]
+    scopes: ["User.Read", "Team.ReadBasic.All"]
 }
 
 // Add endpoints for the Microsoft Grap API
 export const graphConfig = {
     graphMeEndpoint: "https://graph.microsoft.com/v1.0/me"
+}
+
+export const joinedTeams = {
+    myTeamsEndpoint: "https://graph.microsoft.com/v1.0/me/joinedTeams"
 }
 

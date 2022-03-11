@@ -15,7 +15,9 @@ const SignOutButton = () => {
     const { instance } = useMsal();
 
     return (
-        <Button variant="danger" className="ml-auto" onClick={() => handleLogout(instance)}>Sign out using Popup</Button>
+        <Button variant="danger" className="ml-auto" onClick={() => handleLogout(instance)}>
+            Sign out
+        </Button>
     );
 }
 
