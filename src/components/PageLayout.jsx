@@ -11,13 +11,11 @@ const PageLayout = (props) => {
         <>
             <Navbar bg="primary" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/">H&S Incident Reporting</Navbar.Brand>
+                    <Navbar.Brand href="/">Health & Safety Reporting</Navbar.Brand>
                     {isAunthenticated ? <SignOutButton /> : <SignInButton/>}
                 </Container>                
             </Navbar>
-            <Container>
-                <h5 className="pt-4">Welcome to our new Health & Safety Incident Reporting App!</h5>
-                <br/><br/>
+            <Container className="py-5">
                 {props.children}
             </Container>
         </>

@@ -1,9 +1,9 @@
 import { useMsal } from '@azure/msal-react';
-import { Button } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react'
 import { loginRequest } from '../authConfig';
 import { callMsGraph, listMyTeams } from "../graph";
 import ProfileData from './ProfileData';
+import { CgProfile } from 'react-icons/cg'
 
 const ProfileContent = () => {
     const { instance, accounts } = useMsal();
@@ -38,26 +38,23 @@ const ProfileContent = () => {
         // });
     }
 
-    useEffect(async () => {
-      const token = await RequestAccessToken()
-      if(token) {
-        const userData = await callMsGraph(token)
-        setGraphData(userData)
-
-        const userTeams = await listMyTeams(token)
-        setMyTeamsList(userTeams.value)
-      }
+    useEffect(() => {      
+        async function GetData() {
+            const token = await RequestAccessToken()
+            if(token) {
+                const userData = await callMsGraph(token)
+                setGraphData(userData)
+                const userTeams = await listMyTeams(token)
+                setMyTeamsList(userTeams.value)
+            }
+        }
+        GetData()
     }, [])
     
-
     return (
         <>
-            <h5 className="card-title">Signed in as <span style={{ color:'#E91E63' }}>{name}</span></h5>
-            {graphData ?
-                <ProfileData graphData={graphData} teamsData={myTeamsList} />
-                :
-                <Button variant="secondary" onClick={RequestAccessToken}>Request Access Token</Button>
-            }
+            <h4 className="card-title"><CgProfile size={26} /> &nbsp; <span style={{ color:'#E91E63' }}>{name}</span></h4>
+            { graphData ? <ProfileData graphData={graphData} teamsData={myTeamsList} /> : null }
         </>
     )
 }
