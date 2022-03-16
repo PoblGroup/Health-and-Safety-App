@@ -6,7 +6,7 @@ import { Navbar, Container } from 'react-bootstrap'
 
 const PageLayout = (props) => {
     const isAunthenticated = useIsAuthenticated()
-    console.log(isAunthenticated)
+    // console.log(isAunthenticated)
     return (
         <>
             <Navbar bg="primary" variant="dark">

@@ -8,7 +8,8 @@ import { CgProfile } from 'react-icons/cg'
 const ProfileContent = () => {
     const { instance, accounts } = useMsal();
     const [ graphData, setGraphData ] = useState(null)
-    const [ myTeamsList, setMyTeamsList ] = useState([])
+    const [ myEvents, setMyEvents ] = useState([])
+    const [ employeeData, setEmployeeData ] = useState({})
 
     const name = accounts[0] && accounts[0].name
 
@@ -39,22 +40,20 @@ const ProfileContent = () => {
     }
 
     useEffect(() => {      
-        async function GetData() {
+        async function GetGraphData() {
             const token = await RequestAccessToken()
             if(token) {
                 const userData = await callMsGraph(token)
                 setGraphData(userData)
-                const userTeams = await listMyTeams(token)
-                setMyTeamsList(userTeams.value)
             }
         }
-        GetData()
+        GetGraphData()
     }, [])
     
     return (
         <>
             <h4 className="card-title"><CgProfile size={26} /> &nbsp; <span style={{ color:'#E91E63' }}>{name}</span></h4>
-            { graphData ? <ProfileData graphData={graphData} teamsData={myTeamsList} /> : null }
+            { graphData ? <ProfileData graphData={graphData} eventsData={myEvents} /> : null }
         </>
     )
 }

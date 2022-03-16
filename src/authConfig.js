@@ -23,5 +23,3 @@ export const graphConfig = {
 export const joinedTeams = {
     myTeamsEndpoint: "https://graph.microsoft.com/v1.0/me/joinedTeams"
 }
-
-

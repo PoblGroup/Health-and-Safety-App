@@ -3,10 +3,9 @@ import { Badge, Button, Card, Col, Row } from 'react-bootstrap'
 import { MdOutlinePersonalInjury } from 'react-icons/md'
 import { BiFolderPlus } from 'react-icons/bi'
 import { LinkContainer } from 'react-router-bootstrap'
-import { eventsData } from '../data/events'
 
-const ProfileData = ({ graphData }) => {
-    console.log('Logged In User', graphData)
+const ProfileData = ({ graphData, eventsData }) => {
+    // console.log('Logged In User', graphData)
     return (
         <>
             <div className="mt-5" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -22,9 +21,9 @@ const ProfileData = ({ graphData }) => {
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <MdOutlinePersonalInjury style={{ fontSize: '3rem', margin: '.5rem 0 1rem 0', color: '#E91E63'}} />
-                            <Card.Title>{e.title}</Card.Title>
+                            <Card.Title>{e.name}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">{e.type}</Card.Subtitle>
-                            <Badge pill bg={(e.status === 'New') ? 'primary' : 'warning'}>{e.status}</Badge>
+                            <Badge pill bg='primary'>New</Badge>
                             <Card.Text className="mt-2">{e.description}</Card.Text>
                             <LinkContainer to={`/event/${e.id}`}>
                                 <Button variant="light">View Details</Button>

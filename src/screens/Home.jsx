@@ -5,12 +5,12 @@ import ProfileContent from "../components/ProfileContent";
 const Home = () => {
   return (
     <>
-       <AuthenticatedTemplate>
-         <ProfileContent />
-       </AuthenticatedTemplate>
-       <UnauthenticatedTemplate>
-         <h5>Please sign in to get started.</h5>
-       </UnauthenticatedTemplate> 
+      <AuthenticatedTemplate>
+        <ProfileContent />
+      </AuthenticatedTemplate>
+      <UnauthenticatedTemplate>
+        <h5>Please sign in to get started.</h5>
+      </UnauthenticatedTemplate> 
     </>
   )
 }
