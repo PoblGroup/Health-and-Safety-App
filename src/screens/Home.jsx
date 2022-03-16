@@ -1,12 +1,13 @@
 import React from 'react'
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
-import ProfileContent from "../components/ProfileContent";
+import Dashboard from '../components/Dashboard'
+
 
 const Home = () => {
   return (
     <>
       <AuthenticatedTemplate>
-        <ProfileContent />
+        <Dashboard />
       </AuthenticatedTemplate>
       <UnauthenticatedTemplate>
         <h5>Please sign in to get started.</h5>

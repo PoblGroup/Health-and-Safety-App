@@ -3,16 +3,14 @@ import { GetCases } from '../data/cases'
 
 const Cases = ({ employee }) => {
     const [cases, setCases] = useState([])
-
-    console.log(employee)
     
     useEffect(() => {
-        async function FetchCases() {
-            const myCases = await GetCases(employee.pobl_employeehsid)
-            console.log('Cases', myCases)
-            setCases(myCases)
-        }
-        FetchCases()
+        // async function FetchCases() {
+        //     const myCases = await GetCases(employee.pobl_employeehsid)
+        //     console.log('Cases', myCases)
+        //     setCases(myCases)
+        // }
+        // FetchCases()
     }, [])
     
 
