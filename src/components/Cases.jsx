@@ -1,21 +1,50 @@
 import React, { useEffect, useState } from 'react'
+import { Badge, Button, Card, Col, Row } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { GetCases } from '../data/cases'
+import { MdOutlinePersonalInjury } from 'react-icons/md'
+import Moment from 'react-moment'
 
 const Cases = ({ employee }) => {
-    const [cases, setCases] = useState([])
+    const [myCases, setMyCases] = useState([])
     
     useEffect(() => {
-        // async function FetchCases() {
-        //     const myCases = await GetCases(employee.pobl_employeehsid)
-        //     console.log('Cases', myCases)
-        //     setCases(myCases)
-        // }
-        // FetchCases()
-    }, [])
-    
+        async function FetchUserCases() {
+            if(employee.pobl_employeehsid != null) {
+                const userCases = await GetCases(employee.pobl_employeehsid)
+                setMyCases(userCases.value)
+                console.log(userCases.value)
+            }
+        }
+        FetchUserCases()
+    }, [employee])
 
     return (
-        <div>Cases</div>
+        <>
+            <Row xs={1} md={4} className="g-3 mt-2" >
+                {myCases && myCases.map((c, index) => (
+                    <Col key={index}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <MdOutlinePersonalInjury style={{ fontSize: '3rem', margin: '.5rem 0 1rem 0', color: '#E91E63'}} />
+                            <Card.Title>{c.pobl_casename}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">
+                                <Moment date={c.pobl_eventdateandtime} format="dddd, MMMM Do YYYY" />
+                            </Card.Subtitle>
+                            <Badge style={{ marginRight: '.3rem'}} bg='primary'>New</Badge>
+                            <Badge style={{ marginRight: '.3rem'}} bg='dark'>{c.pobl_casetype}</Badge>
+                            <Card.Text className="mt-2">
+                                {(c.pobl_description.length > 200) ? c.pobl_description.slice(0, 100).concat('...') : c.pobl_description}
+                            </Card.Text>
+                            <LinkContainer to={`/event/${c.pobl_eventid}`}>
+                                <Button variant="light">View Details</Button>
+                            </LinkContainer>
+                        </Card.Body>
+                    </Card>
+                    </Col>
+                ))}
+            </Row>
+        </>
     )
 }
 
