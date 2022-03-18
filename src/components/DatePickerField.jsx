@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 
-const DatePickerField = ({label, name, value, onChange}) => {
+const DatePickerField = ({label, name, value, onChange, eventCreated}) => {
   return (
       <>
         <Form.Label>{label}</Form.Label>
@@ -15,6 +15,7 @@ const DatePickerField = ({label, name, value, onChange}) => {
             showTimeSelect
             timeFormat="HH:mm"
             timeIntervals={15}
+            disabled={eventCreated ? true : false}
         />
     </>
   )

@@ -1,6 +1,6 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react'
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Alert, Button, Col, Form, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { BiArrowBack } from 'react-icons/bi'
@@ -12,7 +12,10 @@ import "../Form.css"
 import { CreateNewCase } from '../data/cases'
 
 const CreateEventForm = () => {
+    //TODO: Need to set context api for Employee (Set it in Dashbaord but need in other screens)
+
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [eventCreated, setEventCreated] = useState(false)
     const [locations, setLocations] = useState([])
     const form = useParams().form
 
@@ -32,7 +35,7 @@ const CreateEventForm = () => {
             description: Yup.string().required("Description Required"),
         }),
         onSubmit: async (values) => {
-            // console.log(values)
+            setIsSubmitting(true)
             const formData = {
                 title: values.title,
                 eventDate: values.date.toISOString(),
@@ -42,7 +45,10 @@ const CreateEventForm = () => {
                 caseType: form
             }
             const created = await CreateNewCase(formData)
-            console.log(created)
+            if(created.status == 200) {
+                setIsSubmitting(false)
+                setEventCreated(true)
+            }
         }
     })
 
@@ -68,6 +74,7 @@ const CreateEventForm = () => {
                 </LinkContainer>
                 <div className="mt-4">
                     <h4>New {form} Form</h4>
+                    {eventCreated && <Alert variant="success">Your request was submitted successfully!</Alert>}
                     <Form onSubmit={formik.handleSubmit} className="mt-4">
                         <Row>
                             <Col xs={12} md={6}>
@@ -77,6 +84,7 @@ const CreateEventForm = () => {
                                         value={formik.values.title} 
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
+                                        readOnly={eventCreated ? true : false}
                                     />
                                     {formik.touched.title && formik.errors.title ? <p>{formik.errors.title}</p> : null}
                                 </Form.Group>
@@ -88,6 +96,7 @@ const CreateEventForm = () => {
                                         name="date"
                                         value={formik.values.date}
                                         onChange={formik.setFieldValue}
+                                        eventCreated={eventCreated}
                                     />
                                     {formik.errors.date ? <p>{formik.errors.date}</p> : null}
                                 </Form.Group>
@@ -97,7 +106,12 @@ const CreateEventForm = () => {
                             <Col xs={12} md={6}>
                                 <Form.Group className="mb-3" controlId="location">
                                     <Form.Label>Location of the incident</Form.Label>
-                                    <Form.Select name="location" value={formik.values.location} onChange={formik.handleChange} onBlur={formik.handleBlur}>
+                                    <Form.Select name="location" 
+                                        value={formik.values.location} 
+                                        onChange={formik.handleChange} 
+                                        onBlur={formik.handleBlur}
+                                        disabled={eventCreated ? true : false}
+                                    >
                                         {locations.map(option => {
                                             return (
                                                 <option key={option.value} value={option.value} label={option.key} />
@@ -114,6 +128,7 @@ const CreateEventForm = () => {
                                         value={formik.values.exactLocation} 
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
+                                        readOnly={eventCreated ? true : false}
                                     />
                                     {formik.touched.exactLocation && formik.errors.exactLocation ? <p>{formik.errors.exactLocation}</p> : null}
                                 </Form.Group>
@@ -127,6 +142,7 @@ const CreateEventForm = () => {
                                         value={formik.values.description} 
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
+                                        readOnly={eventCreated ? true : false}
                                     />
                                     {formik.touched.description && formik.errors.description ? <p>{formik.errors.description}</p> : null}
                                 </Form.Group>
@@ -134,7 +150,7 @@ const CreateEventForm = () => {
                         </Row>
                         <Row>
                             <Col>
-                                <Button variant={isSubmitting ? "secondary" : "primary"} type="submit" disabled={isSubmitting ? true : false}>
+                                <Button variant={isSubmitting ? "secondary" : "primary"} type="submit" disabled={isSubmitting || eventCreated ? true : false}>
                                     {isSubmitting ? "Saving your request..." : "Submit"}
                                 </Button>
                             </Col>
