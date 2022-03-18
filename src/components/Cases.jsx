@@ -21,7 +21,7 @@ const Cases = ({ employee }) => {
 
     return (
         <>
-            <Row xs={1} md={4} className="g-3 mt-2" >
+            <Row xs={12} md={4} className="g-3 mt-2" >
                 {myCases && myCases.map((c, index) => (
                     <Col key={index}>
                     <Card style={{ width: '18rem' }}>
