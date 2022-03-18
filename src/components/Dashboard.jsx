@@ -13,7 +13,7 @@ const ProfileContent = () => {
 
     const name = accounts[0] && accounts[0].name
 
-    useEffect(async () => {
+    useEffect(() => {
         async function FecthEmployee() {
             const hsEmployee = await GetEmployee(accounts[0].username)
             setEmployee(hsEmployee.value[0])

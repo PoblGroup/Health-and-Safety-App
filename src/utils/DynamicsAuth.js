@@ -1,6 +1,3 @@
-"use strict";
-import axios from "axios";
-import qs from "qs";
 
 async function GetDynamicsToken() {
     var requestOptions = {

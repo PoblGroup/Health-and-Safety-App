@@ -44,3 +44,35 @@ export const GetCaseSingle = async (id) => {
     }
 }
 
+export const CreateNewCase = async (formData) => {
+    const token = await GetDynamicsToken()
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "title": formData.title,
+        "eventDate": formData.eventDate,
+        "locationId": formData.locationId,
+        "exactLocation": formData.exactLocation,
+        "description": formData.description,
+        "caseType": formData.caseType
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    try {
+        const response = await fetch("http://localhost:5000/api/hs/events", requestOptions)
+        const result = await response.json()
+        return result
+    } catch (error) {
+        console.log('Error', error)
+    }
+}
+
