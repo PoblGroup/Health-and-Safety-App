@@ -10,9 +10,12 @@ import DatePickerField from '../components/DatePickerField'
 import { GetTeams } from '../data/teams'
 import "../Form.css"
 import { CreateNewCase } from '../data/cases'
+import { useEmployee } from '../context/EmployeeContext'
 
 const CreateEventForm = () => {
     //TODO: Need to set context api for Employee (Set it in Dashbaord but need in other screens)
+    const employee = useEmployee()
+    console.log(employee)
 
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [eventCreated, setEventCreated] = useState(false)

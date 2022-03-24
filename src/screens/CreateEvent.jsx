@@ -27,8 +27,8 @@ const CreateEvent = () => {
                         <Card.Title style={{ display: 'flex', alignItems: 'center'}}>
                           <BiFirstAid style={{ fontSize: '1.4rem', marginRight: '10px', color: '#E91E63'}} />{" "}{c.name} Form
                         </Card.Title>
-                        <Card.Text className="mt-2">
-                            <p className="text-muted">{c.description}</p>
+                        <Card.Text className="mt-2 text-muted">
+                            {c.description}
                         </Card.Text>
                         <LinkContainer to={c.name}>
                             <Button variant="primary">Select</Button>

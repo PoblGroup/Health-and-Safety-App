@@ -1,26 +1,22 @@
 import { useMsal } from '@azure/msal-react';
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Tab, Tabs } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { GetEmployee } from '../data/employee';
 import Cases from './Cases';
+import { useEmployee, useEmployeeFetch } from '../context/EmployeeContext';
 
 
 const ProfileContent = () => {
     const { instance, accounts } = useMsal();
-    const [ graphData, setGraphData ] = useState(null)
-    const [ employee, setEmployee ] = useState({})
-
     const name = accounts[0] && accounts[0].name
+    const employee = useEmployee()
+    const fetchEmployee = useEmployeeFetch()
 
     useEffect(() => {
-        async function FecthEmployee() {
-            const hsEmployee = await GetEmployee(accounts[0].username)
-            setEmployee(hsEmployee.value[0])
-        }
-        FecthEmployee()
+        fetchEmployee(accounts[0].username)
     }, [])
     
+
     return (
         <>
             <h4>Hey! {name}</h4>
@@ -36,7 +32,7 @@ const ProfileContent = () => {
             <div className="mt-5">
             <Tabs defaultActiveKey="cases" id="uncontrolled-tab-example" className="mb-3">
                 <Tab eventKey="cases" title="My Cases & Documents">
-                    <Cases employee={employee}/>
+                    {employee && <Cases employee={employee}/>}
                     {/*  Open Policy Document Responses  */}
                 </Tab>
                 <Tab eventKey="myTeam" title="My Team">
