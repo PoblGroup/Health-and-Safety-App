@@ -22,8 +22,8 @@ export function EmployeeProvider({ children }) {
 
     async function fetchEmployee(email) {
         const hsEmployee = await GetEmployee(email)
-        setEmployee(hsEmployee.value[0])
-        localStorage.setItem("HS Employee", JSON.stringify(hsEmployee.value[0]));
+        setEmployee(hsEmployee)
+        localStorage.setItem("HS Employee", JSON.stringify(hsEmployee));
     }
 
     return (

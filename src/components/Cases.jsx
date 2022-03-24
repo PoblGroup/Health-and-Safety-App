@@ -9,6 +9,8 @@ import { motion } from 'framer-motion'
 const Cases = ({ employee }) => {
     const [myCases, setMyCases] = useState([])
     
+    console.log(employee)
+
     useEffect(() => {
         async function FetchUserCases() {
             if(employee.pobl_employeehsid != null) {
