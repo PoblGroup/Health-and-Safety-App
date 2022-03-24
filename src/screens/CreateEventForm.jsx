@@ -28,7 +28,7 @@ const CreateEventForm = () => {
             description: ""
         },
         validationSchema: Yup.object({
-            title: Yup.string().max(15, "Exceeds 15 Characters").required("Title Required"),
+            title: Yup.string().max(150, "Exceeds 150 Characters").required("Title Required"),
             date: Yup.string().required("Incident Date Required"),
             location: Yup.string().required("Location Required"),
             exactLocation: Yup.string().required("Exact Location Required"),
