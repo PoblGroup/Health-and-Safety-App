@@ -57,7 +57,9 @@ export const CreateNewCase = async (formData) => {
         "locationId": formData.locationId,
         "exactLocation": formData.exactLocation,
         "description": formData.description,
-        "caseType": formData.caseType
+        "caseType": formData.caseType,
+        "jobRoleId": formData.jobRole,
+        "employeeId": formData.employeeId,
     });
 
     var requestOptions = {

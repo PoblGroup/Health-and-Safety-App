@@ -8,14 +8,15 @@ import { motion } from 'framer-motion'
 
 const Cases = ({ employee }) => {
     const [myCases, setMyCases] = useState([])
-    
-    console.log(employee)
+
+    const currentEmployee = employee.employee.value[0]
 
     useEffect(() => {
         async function FetchUserCases() {
-            if(employee.pobl_employeehsid != null) {
-                const userCases = await GetCases(employee.pobl_employeehsid)
+            if(currentEmployee.pobl_employeehsid != null) {
+                const userCases = await GetCases(currentEmployee.pobl_employeehsid)
                 setMyCases(userCases.value)
+                console.log(userCases)
             }
         }
         FetchUserCases()
@@ -35,8 +36,7 @@ const Cases = ({ employee }) => {
                                     <Moment date={c.pobl_eventdateandtime} format="dddd, MMMM Do YYYY" />
                                 </Card.Subtitle>
                                 <div className='mb-3'>
-                                    <Badge style={{ marginRight: '.3rem'}} bg='primary'>New</Badge>
-                                    <Badge style={{ marginRight: '.3rem'}} bg='dark'>{c.pobl_casetype}</Badge>
+                                    <Badge pill style={{ marginRight: '.3rem'}} bg='primary'>{c.pobl_casetype}</Badge>
                                 </div>
                                 {/* <Card.Text className="mt-2">
                                     {(c.pobl_description.length > 200) ? c.pobl_description.slice(0, 100).concat('...') : c.pobl_description}

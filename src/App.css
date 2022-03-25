@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+.event__details label {
+  font-size: .8rem;
+  font-weight: 500;
+}
+
+.event__details-section {
+  padding: 3rem 0 0 0!important;
+}

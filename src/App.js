@@ -7,6 +7,7 @@ import EventScreen from "./screens/EventScreen";
 import CreateEvent from "./screens/CreateEvent";
 import CreateEventForm from "./screens/CreateEventForm";
 import { EmployeeProvider } from "./context/EmployeeContext";
+import '../src/App.css'
 
 function App() {
   return (
