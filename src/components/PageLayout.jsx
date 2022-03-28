@@ -11,7 +11,15 @@ const PageLayout = (props) => {
         <>
             <Navbar bg="primary" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/">Health & Safety Reporting</Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <img
+                            id="logo"
+                            alt=""
+                            src="/logo_white.png"
+                            className="d-inline-block align-top"
+                        />{' '}
+                        Health & Safety Reporting
+                    </Navbar.Brand>
                     {isAunthenticated ? <SignOutButton /> : <SignInButton/>}
                 </Container>                
             </Navbar>

@@ -46,3 +46,31 @@
 .event__details-section {
   padding: 3rem 0 0 0!important;
 }
+
+.navbar-brand {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navbar-brand #logo {
+  width: 80px;
+  margin-right: 20px;
+}
+
+/* .card {
+  justify-content: center;
+  align-items: center;
+} */
+
+.card__body {
+  align-items: center;
+  display:flex;
+  flex-direction: column;
+}
+
+.card__image {
+  width: 80px;
+  height: auto; 
+  margin: .75rem
+}

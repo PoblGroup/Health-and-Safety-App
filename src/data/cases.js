@@ -44,28 +44,37 @@ export const GetCaseSingle = async (id) => {
     }
 }
 
-export const CreateNewCase = async (formData) => {
+export const CreateNewCase = async (formData, form) => {
     const token = await GetDynamicsToken()
 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
-        "title": formData.title,
-        "eventDate": formData.eventDate,
-        "locationId": formData.locationId,
-        "exactLocation": formData.exactLocation,
-        "description": formData.description,
-        "caseType": formData.caseType,
-        "jobRoleId": formData.jobRole,
-        "employeeId": formData.employeeId,
-    });
+    var data = {
+        title: formData.title,
+        eventDate: formData.eventDate,
+        locationId: formData.locationId,
+        exactLocation: formData.exactLocation,
+        description: formData.description,
+        caseType: formData.caseType,
+        jobRoleId: formData.jobRole,
+        employeeId: formData.employeeId,
+        
+    };
+
+    if(form === "Accident") {
+        data.affectedPerson = formData.affectedPerson
+        data.affectedPersonNotes = formData.affectedPersonNotes
+        data.category = formData.category
+        data.injury = formData.injury
+        data.injuryPart = formData.injuryPart
+    }
 
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: raw,
+        body: JSON.stringify(data),
         redirect: 'follow'
     };
 
@@ -78,3 +87,45 @@ export const CreateNewCase = async (formData) => {
     }
 }
 
+export const GetLookupValues = async () => {
+    const token = await GetDynamicsToken()
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/hs/events/lookups`, requestOptions)
+        const result = await response.json()
+
+        const categories = []
+        categories.push({ key: 'Please select an option', value: ''})
+        result.categories.value.map(c => categories.push({ key: c.pobl_accidentcategoryname, value: c.pobl_accidentcategoryid}))
+
+        const injuries = []
+        injuries.push({ key: 'Please select an option', value: ''})
+        result.injuries.value.map(c => injuries.push({ key: c.pobl_injurysustainedname, value: c.pobl_injurysustainedid}))
+
+        const injuryParts = []
+        injuryParts.push({ key: '', value: ''})
+        result.injuryParts.value.map(c => injuryParts.push({ key: c.pobl_injuredpartname, value: c.pobl_injuredpartid}))
+
+        const employees = []
+        employees.push({ key: '', value: ''})
+        result.employees.value.map(e => employees.push({ key: e.pobl_employeename, value: e.pobl_employeehsid}))
+
+        return {
+            categories,
+            injuries,
+            injuryParts,
+            employees
+        }
+    } catch (error) {
+        console.log('Error', error)
+    }
+}

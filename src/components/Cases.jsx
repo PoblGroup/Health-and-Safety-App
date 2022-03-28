@@ -15,8 +15,11 @@ const Cases = ({ employee }) => {
         async function FetchUserCases() {
             if(currentEmployee.pobl_employeehsid != null) {
                 const userCases = await GetCases(currentEmployee.pobl_employeehsid)
-                setMyCases(userCases.value)
-                console.log(userCases)
+                userCases.value.map(c => {
+                    c.pobl_eventdateandtime = new Date(c.pobl_eventdateandtime)
+                })
+                const sortedUserCases = userCases.value.slice().sort((a, b) => b.pobl_eventdateandtime - a.pobl_eventdateandtime)
+                setMyCases(sortedUserCases)
             }
         }
         FetchUserCases()
@@ -28,24 +31,29 @@ const Cases = ({ employee }) => {
                 {myCases && myCases.map((c, index) => (
                     <motion.div initial={{opacity: 0, y: 50}} animate={{opacity: 1, y: 0}} transition={{duration: 0.3, delay: index * 0.15}} key={index}>
                     <Col>
-                        <Card>
-                            <Card.Body>
-                                <MdOutlinePersonalInjury style={{ fontSize: '3rem', margin: '.5rem 0 1rem 0', color: '#E91E63'}} />
-                                <Card.Title>{c.pobl_casename}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">
-                                    <Moment date={c.pobl_eventdateandtime} format="dddd, MMMM Do YYYY" />
-                                </Card.Subtitle>
-                                <div className='mb-3'>
-                                    <Badge pill style={{ marginRight: '.3rem'}} bg='primary'>{c.pobl_casetype}</Badge>
-                                </div>
-                                {/* <Card.Text className="mt-2">
-                                    {(c.pobl_description.length > 200) ? c.pobl_description.slice(0, 100).concat('...') : c.pobl_description}
-                                </Card.Text> */}
-                                <LinkContainer to={`/event/${c.pobl_eventid}`}>
-                                    <Button variant="light">View Details</Button>
-                                </LinkContainer>
-                            </Card.Body>
-                        </Card>
+                        <LinkContainer to={`/event/${c.pobl_eventid}`}>
+                            <motion.div whileHover={{ scale: 1.025, boxShadow: "0px 0px 30px rgba(0,0,0,.05)", cursor: 'pointer' }}>
+                            <Card style={{borderColor: 'rgba(0,0,0,.05)'}}>
+                                <Card.Body className="card__body">
+                                    {/* <MdOutlinePersonalInjury style={{ fontSize: '3rem', margin: '.5rem 0 1rem 0', color: '#E91E63'}} /> */}
+                                    <img className="card__image" src="/accident.png" alt="" />
+                                    <Card.Title>{c.pobl_casename}</Card.Title>
+                                    <Card.Subtitle className="text-muted" style={{ margin: '5px 0', fontSize: '14px'}}>
+                                        <Moment date={c.pobl_eventdateandtime} format="dddd, MMMM Do YYYY" />
+                                    </Card.Subtitle>
+                                    <div style={{ margin: '10px 0' }}>
+                                        <Badge pill style={{ marginRight: '.3rem', padding: '5px 10px'}} bg='primary'>{c.pobl_casetype}</Badge>
+                                    </div>
+                                    {/* <Card.Text className="mt-2">
+                                        {(c.pobl_description.length > 200) ? c.pobl_description.slice(0, 100).concat('...') : c.pobl_description}
+                                    </Card.Text> */}
+                                    {/* <LinkContainer to={`/event/${c.pobl_eventid}`}>
+                                        <Button variant="light">View Details</Button>
+                                    </LinkContainer> */}
+                                </Card.Body>
+                            </Card>
+                            </motion.div>
+                        </LinkContainer>
                     </Col>
                     </motion.div>
                 ))}

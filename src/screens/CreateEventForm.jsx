@@ -8,7 +8,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import DatePickerField from '../components/DatePickerField'
 import { GetTeams } from '../data/teams'
-import { CreateNewCase } from '../data/cases'
+import { CreateNewCase, GetLookupValues } from '../data/cases'
 import { useEmployee } from '../context/EmployeeContext'
 import "../Form.css"
 
@@ -20,6 +20,10 @@ const CreateEventForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [eventCreated, setEventCreated] = useState(false)
     const [locations, setLocations] = useState([])
+    const [accidentCategories, setAccidentCategories] = useState([])
+    const [injuries, setInjuries] = useState([])
+    const [injuryParts, setInjuryParts] = useState([])
+    const [employees, setEmployees] = useState([])
     const form = useParams().form
 
     const formik = useFormik({
@@ -29,7 +33,12 @@ const CreateEventForm = () => {
             location: "",
             exactLocation: "",
             description: "",
-            jobRole: roles[0].id
+            jobRole: roles[0].id,
+            affectedPerson: "",
+            affectedPersonNotes: "",
+            category: "",
+            injury: "",
+            injuryPart: ""
         },
         validationSchema: Yup.object({
             title: Yup.string().max(150, "Exceeds 150 Characters").required("Title Required"),
@@ -38,6 +47,8 @@ const CreateEventForm = () => {
             exactLocation: Yup.string().required("Exact Location Required"),
             description: Yup.string().required("Description Required"),
             jobRole: Yup.string().required("Job Role Required"),
+            category: (form === "Accident") ? Yup.string().required("Category Required") : Yup.string(),
+            injury: (form === "Accident") ? Yup.string().required("Injury Required") : Yup.string()
         }),
         onSubmit: async (values) => {
             setIsSubmitting(true)
@@ -49,10 +60,19 @@ const CreateEventForm = () => {
                 description: values.description,
                 caseType: form,
                 jobRole: values.jobRole,
-                employeeId: employee.pobl_employeehsid
+                employeeId: employee.pobl_employeehsid,
             }
-            const created = await CreateNewCase(formData)
-            if(created.status == 200) {
+
+            if(form === "Accident") {
+                formData.affectedPerson = values.affectedPerson
+                formData.affectedPersonNotes = values.affectedPersonNotes
+                formData.category = values.category
+                formData.injury = values.injury
+                formData.injuryPart = values.injuryPart
+            }
+
+            const created = await CreateNewCase(formData, form)
+            if(created.status === 200) {
                 setIsSubmitting(false)
                 setEventCreated(true)
             }
@@ -60,16 +80,27 @@ const CreateEventForm = () => {
     })
 
     useEffect(() => {
-      async function FetchTeams() {
-          let loc = []
-          const hsTeams = await GetTeams()
-          loc.push({ key: 'Please select an option', value: ''})
-          if(hsTeams.value.length > 0) {
-            hsTeams.value.map(t => loc.push({ key: t.pobl_teamname, value: t.pobl_teamid}))
-            setLocations(loc)
-          }
-      }
-      FetchTeams()
+        async function FetchTeams() {
+            let loc = []
+            const hsTeams = await GetTeams()
+            loc.push({ key: 'Please select an option', value: ''})
+            if(hsTeams.value.length > 0) {
+                hsTeams.value.map(t => loc.push({ key: t.pobl_teamname, value: t.pobl_teamid}))
+                setLocations(loc)
+            }
+        }
+        FetchTeams()
+
+        async function FetchLookups() {
+            const lookups = await GetLookupValues()
+            if (lookups) {
+                setAccidentCategories(lookups.categories)
+                setInjuries(lookups.injuries)
+                setInjuryParts(lookups.injuryParts)
+                setEmployees(lookups.employees)
+            }
+        }
+        FetchLookups()
     }, [])
     
 
@@ -108,7 +139,6 @@ const CreateEventForm = () => {
                                             {formik.touched.title && formik.errors.title ? <p>{formik.errors.title}</p> : null}
                                         </Form.Group>
                                     </Col>
-
                                     <Col xs={12} md={6}>
                                         <Form.Group className="mb-3" controlId="jobRole">
                                             <Form.Label>Job Role</Form.Label>
@@ -187,6 +217,101 @@ const CreateEventForm = () => {
                                         </Form.Group>
                                     </Col>
                                 </Row>
+                                {(form === "Accident") ? 
+                                    <>
+                                        <h5 className="mt-3 mb-3">Accident Details</h5>
+                                        {/* If Accident Type */}
+                                        <Row>
+                                            <Col xs={12} md={4}>
+                                                <Form.Group className="mb-3" controlId="category">
+                                                    <Form.Label>Accident Category</Form.Label>
+                                                    <Form.Select name="category" 
+                                                        value={formik.values.category} 
+                                                        onChange={formik.handleChange} 
+                                                        onBlur={formik.handleBlur}
+                                                        disabled={eventCreated ? true : false}
+                                                    >
+                                                        {accidentCategories.map(option => {
+                                                            return (
+                                                                <option key={option.value} value={option.value} label={option.key} />
+                                                            )
+                                                        })}
+                                                    </Form.Select>
+                                                    {formik.touched.category && formik.errors.category ? <p>{formik.errors.category}</p> : null}
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={12} md={4}>
+                                                <Form.Group className="mb-3" controlId="injury">
+                                                    <Form.Label>Accident Injury Sustained</Form.Label>
+                                                    <Form.Select name="injury" 
+                                                        value={formik.values.injury} 
+                                                        onChange={formik.handleChange} 
+                                                        onBlur={formik.handleBlur}
+                                                        disabled={eventCreated ? true : false}
+                                                    >
+                                                        {injuries.map(option => {
+                                                            return (
+                                                                <option key={option.value} value={option.value} label={option.key} />
+                                                            )
+                                                        })}
+                                                    </Form.Select>
+                                                    {formik.touched.injury && formik.errors.injury ? <p>{formik.errors.injury}</p> : null}
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={12} md={4}>
+                                                <Form.Group className="mb-3" controlId="injuryPart">
+                                                    <Form.Label>Accident Injured Part</Form.Label>
+                                                    <Form.Select name="injuryPart" 
+                                                        value={formik.values.injuryPart} 
+                                                        onChange={formik.handleChange} 
+                                                        onBlur={formik.handleBlur}
+                                                        disabled={eventCreated ? true : false}
+                                                    >
+                                                        {injuryParts.map(option => {
+                                                            return (
+                                                                <option key={option.value} value={option.value} label={option.key} />
+                                                            )
+                                                        })}
+                                                    </Form.Select>
+                                                    {formik.touched.injuryPart && formik.errors.injuryPart ? <p>{formik.errors.injuryPart}</p> : null}
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        {/* Affected Person */}
+                                        <Row>
+                                            <Col xs={12} md={4}>
+                                                <Form.Group className="mb-3" controlId="affectedPerson">
+                                                    <Form.Label>Affected Person (Employee)</Form.Label>
+                                                    <Form.Select name="affectedPerson" 
+                                                        value={formik.values.affectedPerson} 
+                                                        onChange={formik.handleChange} 
+                                                        onBlur={formik.handleBlur}
+                                                        disabled={eventCreated ? true : false}
+                                                    >
+                                                        {employees.map(option => {
+                                                            return (
+                                                                <option key={option.value} value={option.value} label={option.key} />
+                                                            )
+                                                        })}
+                                                    </Form.Select>
+                                                    {formik.touched.affectedPerson && formik.errors.affectedPerson ? <p>{formik.errors.affectedPerson}</p> : null}
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group className="mb-3" controlId="affectedPersonNotes">
+                                                    <Form.Label>Affected Person (Notes)</Form.Label>
+                                                    <Form.Control name="affectedPersonNotes" as="textarea" rows={4} 
+                                                        value={formik.values.affectedPersonNotes} 
+                                                        onChange={formik.handleChange}
+                                                        onBlur={formik.handleBlur}
+                                                        readOnly={eventCreated ? true : false}
+                                                    />
+                                                    {formik.touched.affectedPersonNotes && formik.errors.affectedPersonNotes ? <p>{formik.errors.affectedPersonNotes}</p> : null}
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </>
+                                : null }
                                 <Row>
                                     <Col>
                                         <Button variant={isSubmitting ? "secondary" : "primary"} type="submit" disabled={isSubmitting || eventCreated ? true : false}>
