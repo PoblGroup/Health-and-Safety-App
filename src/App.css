@@ -37,6 +37,9 @@
   }
 }
 
+a {
+  text-decoration: none!important;
+}
 
 .event__details label {
   font-size: .8rem;

@@ -13,6 +13,7 @@ export function useEmployeeFetch() {
 }
 
 export function EmployeeProvider({ children }) {
+    // const [employee, setEmployee] = useState(null)
     const [employee, setEmployee] = useState(() => {
         // Get Stored Value
         const e = localStorage.getItem("HS Employee")
