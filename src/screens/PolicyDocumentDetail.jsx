@@ -44,7 +44,7 @@ const PolicyDocumentDetail = () => {
 
     return (
         <>
-            <LinkContainer to='/'>
+            <LinkContainer to='/documents'>
                 <Button variant="light" style={{ display: 'flex', alignItems: 'center' }}><BiArrowBack style={{fontSize: '1.1rem'}}/>&nbsp; Back</Button>
             </LinkContainer>
             {loading && (

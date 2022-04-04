@@ -9,7 +9,7 @@ const PageLayout = (props) => {
     // console.log(isAunthenticated)
     return (
         <>
-            <Navbar bg="primary" variant="dark">
+            <Navbar bg="primary" variant="dark" expand="lg">
                 <Container>
                     <Navbar.Brand href="/">
                         <img
@@ -19,14 +19,20 @@ const PageLayout = (props) => {
                             className="d-inline-block align-top"
                         />{' '}
                     </Navbar.Brand>
-                    <Nav className="me-auto">
-                        <Nav.Link href="cases">Cases</Nav.Link>
-                        <Nav.Link href="documents">Documents</Nav.Link>
-                        <Nav.Link href="myteam">My Team</Nav.Link>
-                        {/* <Navbar.Text>Signed in as: <a href="#login">Mark Otto</a></Navbar.Text> */}
-                    </Nav>
-                    {isAunthenticated ? <SignOutButton /> : <SignInButton/>}
-                </Container>                
+                    {isAunthenticated ?
+                        <>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="me-auto">
+                                    <Nav.Link href="cases">Cases</Nav.Link>
+                                    <Nav.Link href="documents">Documents</Nav.Link>
+                                    <Nav.Link href="myteam">My Team</Nav.Link>
+                                </Nav>
+                                <SignOutButton/>
+                            </Navbar.Collapse>
+                        </>
+                    : null }
+                </Container>
             </Navbar>
             <Container className="py-5">
                 {props.children}
