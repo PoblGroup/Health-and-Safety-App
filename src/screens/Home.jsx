@@ -7,14 +7,12 @@ import { Container } from 'react-bootstrap';
 const Home = () => {
   return (
     <>
-      <Container className="py-5">
         <AuthenticatedTemplate>
           <Dashboard />
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
           <h5>Please sign in to get started.</h5>
-        </UnauthenticatedTemplate> 
-      </Container>
+        </UnauthenticatedTemplate>
     </>
   )
 }

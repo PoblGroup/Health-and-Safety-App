@@ -106,7 +106,6 @@ const CreateEventForm = () => {
 
     return (
         <>
-            <Container className='py-5'>
                 <AuthenticatedTemplate>
                     {eventCreated ? (
                         <>
@@ -328,8 +327,7 @@ const CreateEventForm = () => {
                 </AuthenticatedTemplate>
                 <UnauthenticatedTemplate>
                     <h5>Seems your not signed in! Please sign in to create a new case.</h5>
-                </UnauthenticatedTemplate> 
-            </Container>
+                </UnauthenticatedTemplate>
         </>
     )
 }

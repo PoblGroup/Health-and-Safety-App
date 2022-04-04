@@ -16,17 +16,15 @@ const OpenResponses = () => {
 
     return (
         <>
-            <Container className='py-5'>
-                <AuthenticatedTemplate>
-                    <h4>Open Responses</h4>
-                    <p>Here are your open Policy Repsonses that will need to be signed. Clicking through to each one will show you what documents 
-                        you need to read and the ability to update confirming you have read the document.</p>
-                    {employee && <PolicyResponses employee={employee}/>}
-                </AuthenticatedTemplate>
-                <UnauthenticatedTemplate>
-                    <h5>Please sign in to get started.</h5>
-                </UnauthenticatedTemplate> 
-            </Container>
+            <AuthenticatedTemplate>
+                <h4>Open Responses</h4>
+                <p>Here are your open Policy Repsonses that will need to be signed. Clicking through to each one will show you what documents 
+                    you need to read and the ability to update confirming you have read the document.</p>
+                {employee && <PolicyResponses employee={employee}/>}
+            </AuthenticatedTemplate>
+            <UnauthenticatedTemplate>
+                <h5>Please sign in to get started.</h5>
+            </UnauthenticatedTemplate> 
         </>
     )
 }

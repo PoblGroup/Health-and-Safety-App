@@ -14,7 +14,6 @@ const CreateEvent = () => {
 
   return (
     <>
-      <Container className='py-5'>
         <AuthenticatedTemplate>
           <LinkContainer to='/cases'>
               <Button variant="light" style={{ display: 'flex', alignItems: 'center' }}><BiArrowBack style={{fontSize: '1.1rem'}}/>&nbsp; Back</Button>
@@ -42,8 +41,7 @@ const CreateEvent = () => {
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
           <h5>Seems your not signed in! Please sign in to create a new case.</h5>
-        </UnauthenticatedTemplate> 
-      </Container>
+        </UnauthenticatedTemplate>
     </>
   )
 }

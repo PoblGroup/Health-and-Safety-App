@@ -22,12 +22,15 @@ const PageLayout = (props) => {
                     <Nav className="me-auto">
                         <Nav.Link href="cases">Cases</Nav.Link>
                         <Nav.Link href="documents">Documents</Nav.Link>
+                        <Nav.Link href="myteam">My Team</Nav.Link>
                         {/* <Navbar.Text>Signed in as: <a href="#login">Mark Otto</a></Navbar.Text> */}
                     </Nav>
                     {isAunthenticated ? <SignOutButton /> : <SignInButton/>}
                 </Container>                
             </Navbar>
-            {props.children}
+            <Container className="py-5">
+                {props.children}
+            </Container>
         </>
     )
 }
