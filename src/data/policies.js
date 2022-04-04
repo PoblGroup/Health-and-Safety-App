@@ -45,3 +45,26 @@ export const GetPolicyResponse = async (id) => {
         }
     }
 }
+
+export const ConfirmResponse = async (id) => {
+    if (id) {
+        const token = await GetDynamicsToken()
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/hs/policyresponses/${id}`, requestOptions)
+            const result = await response.json()
+            return result
+        } catch (error) {
+            console.log('Error', error)
+        }
+    }
+}

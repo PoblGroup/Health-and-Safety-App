@@ -3,7 +3,7 @@ import { Alert, Button, Col, ListGroup, Row, Spinner } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useParams } from 'react-router-dom'
 import { BiArrowBack, BiFile } from 'react-icons/bi'
-import { GetPolicyResponse } from '../data/policies'
+import { ConfirmResponse, GetPolicyResponse } from '../data/policies'
 import Moment from 'react-moment'
 
 const PolicyDocumentDetail = () => {
@@ -12,6 +12,8 @@ const PolicyDocumentDetail = () => {
     const [policyResponseError, setPolicyResponseError] = useState(null)
     const [expired, setExpired] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [isError, setIsError] = useState(false)
+    const [confirmed, setConfirmed] = useState({ status: false, message: ""})
 
     useEffect(() => {
         async function FetchPolicyResponse(id) {
@@ -33,6 +35,13 @@ const PolicyDocumentDetail = () => {
         if(signBy < today) setExpired(true)
     }
 
+    const confirmResponse = async (e) => {
+        e.preventDefault()
+        const {error, message} = await ConfirmResponse(id)
+        if(message) setConfirmed({status: true, message})
+        if(error) setIsError(true)
+    }
+
     return (
         <>
             <LinkContainer to='/'>
@@ -45,6 +54,7 @@ const PolicyDocumentDetail = () => {
                 </Spinner>
             </div>)}
             {policyResponseError && <p>Error: ${policyResponseError}</p>}
+            {isError && <Alert variant="danger" className="mt-3">Error: Unable to update Policy Response. Please contact service desk if this error continues.</Alert>}
             {policyResponse && (
                 <>
                     {expired && <Alert variant="warning" className="mt-3">This response has  passed the sign by date.</Alert>}
@@ -95,13 +105,15 @@ const PolicyDocumentDetail = () => {
                             </ListGroup>
                         </Col>
                     </Row>
-                    <Row>
+                    {(confirmed.status == true) ? <Alert variant="success" className="mt-5"><strong>Thank You!</strong> - Policy Response Confirmed</Alert> :
+                    (!expired) ? <Row>
                         <Col xs={12} md={12}><h5 className='mt-4'>Confirmation</h5></Col>
                         <Col xs={12} md={12}><p>Please confirm that you have read all the attached documents above</p></Col>
                         <Col>
-                            <Button variant="primary">Confirm</Button>
+                            <Button variant="primary" onClick={confirmResponse}>Confirm</Button>
                         </Col>
-                    </Row>
+                    </Row> : null
+                    }
                 </>
             )}
         </>

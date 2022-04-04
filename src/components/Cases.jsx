@@ -31,7 +31,7 @@ const Cases = ({ employee }) => {
                 {myCases && myCases.map((c, index) => (
                     <motion.div initial={{opacity: 0, y: 50}} animate={{opacity: 1, y: 0}} transition={{duration: 0.3, delay: index * 0.15}} key={index}>
                     <Col>
-                        <LinkContainer to={`/event/${c.pobl_eventid}`}>
+                        <LinkContainer to={`/cases/${c.pobl_eventid}`}>
                             <motion.div whileHover={{ scale: 1.025, boxShadow: "0px 0px 30px rgba(0,0,0,.05)", cursor: 'pointer' }}>
                             <Card style={{borderColor: 'rgba(0,0,0,.05)'}}>
                                 <Card.Body className="card__body">

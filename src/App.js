@@ -9,6 +9,8 @@ import CreateEventForm from "./screens/CreateEventForm";
 import { EmployeeProvider } from "./context/EmployeeContext";
 import '../src/App.css'
 import PolicyDocumentDetail from "./screens/PolicyDocumentDetail";
+import Cases from "./components/Cases";
+import PolicyResponses from "./components/PolicyResponses";
 
 function App() {
   return (
@@ -17,9 +19,12 @@ function App() {
         <Router>
           <Routes>
             <Route index path="/" element={<Home />}></Route>
-            <Route path="event/:id" element={<EventScreen />} />
-            <Route path="event-new" element={<CreateEvent />} />
-            <Route path="event-new/:form" element={<CreateEventForm />} />
+            <Route index path="cases" element={<Cases />}></Route>
+            <Route index path="documents" element={<PolicyResponses />}></Route>
+            <Route index path="myteam" element={<Home />}></Route>
+            <Route path="cases/:id" element={<EventScreen />} />
+            <Route path="cases-new" element={<CreateEvent />} />
+            <Route path="cases-new/:form" element={<CreateEventForm />} />
             <Route path="policy/:id" element={<PolicyDocumentDetail />} />
           </Routes>
         </Router>

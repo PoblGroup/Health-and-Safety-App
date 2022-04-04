@@ -23,7 +23,7 @@ const ProfileContent = () => {
             <h4>Hey! {name}</h4>
             <p>Welcome to the new Health & Safety Reporting App! Where you can submit new cases and sign any policy documents.</p>
             <div className="mt-4">
-                <LinkContainer to={`/event-new`}>
+                <LinkContainer to={`/cases-new`}>
                     <Button variant="primary">Create New Case</Button>
                 </LinkContainer>
             </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { useIsAuthenticated } from '@azure/msal-react'
 import SignOutButton from './SignOutButton'
 import SignInButton from './SignInButton'
-import { Navbar, Container } from 'react-bootstrap'
+import { Navbar, Container, Nav } from 'react-bootstrap'
 
 const PageLayout = (props) => {
     const isAunthenticated = useIsAuthenticated()
@@ -17,9 +17,14 @@ const PageLayout = (props) => {
                             alt=""
                             src="/logo_white.png"
                             className="d-inline-block align-top"
-                        />{' '}
-                        Health & Safety Reporting
+                        />{' '}H&S Reporting
                     </Navbar.Brand>
+                    {/* <Nav className="">
+                        <Nav.Link href="cases">Cases</Nav.Link>
+                        <Nav.Link href="documents">Documents</Nav.Link>
+                        <Nav.Link href="myteam">My Team</Nav.Link>
+                        <Navbar.Text>Signed in as: <a href="#login">Mark Otto</a></Navbar.Text>
+                    </Nav> */}
                     {isAunthenticated ? <SignOutButton /> : <SignInButton/>}
                 </Container>                
             </Navbar>
@@ -31,3 +36,4 @@ const PageLayout = (props) => {
 }
 
 export default PageLayout
+
