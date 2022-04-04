@@ -41,6 +41,32 @@ a {
   text-decoration: none!important;
 }
 
+/* Header */
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: rgb(24, 43, 73);
+  padding: 2rem;
+  text-align: center;
+}
+
+header .cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+header img {
+  width: 600px;
+}
+
+header img svg {
+  width: 600px;
+}
+
 .event__details label {
   font-size: .8rem;
   font-weight: 500;

@@ -9,8 +9,8 @@ import CreateEventForm from "./screens/CreateEventForm";
 import { EmployeeProvider } from "./context/EmployeeContext";
 import '../src/App.css'
 import PolicyDocumentDetail from "./screens/PolicyDocumentDetail";
-import Cases from "./components/Cases";
-import PolicyResponses from "./components/PolicyResponses";
+import OpenCases from "./screens/OpenCases";
+import OpenResponses from "./screens/OpenResponses";
 
 function App() {
   return (
@@ -19,9 +19,8 @@ function App() {
         <Router>
           <Routes>
             <Route index path="/" element={<Home />}></Route>
-            <Route index path="cases" element={<Cases />}></Route>
-            <Route index path="documents" element={<PolicyResponses />}></Route>
-            <Route index path="myteam" element={<Home />}></Route>
+            <Route index path="cases" element={<OpenCases />}></Route>
+            <Route index path="documents" element={<OpenResponses />}></Route>
             <Route path="cases/:id" element={<EventScreen />} />
             <Route path="cases-new" element={<CreateEvent />} />
             <Route path="cases-new/:form" element={<CreateEventForm />} />

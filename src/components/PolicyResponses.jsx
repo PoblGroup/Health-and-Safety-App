@@ -26,12 +26,7 @@ const PolicyResponses = ({employee}) => {
 
   return (
       <>
-        <p style={{margin: '1.8rem 0'}}>
-            Here are your open Policy Repsonses that will need to be signed. 
-            Clicking through to each one will show you what documents you need to read and the 
-            ability to update confirming you have read the document.
-        </p>
-        <Table responsive hover>
+        <Table responsive hover className='mt-4'>
             <thead>
                 <tr>
                     <th hidden>Id</th>
