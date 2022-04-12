@@ -7,12 +7,11 @@ import EventScreen from "./screens/EventScreen";
 import CreateEvent from "./screens/CreateEvent";
 import CreateEventForm from "./screens/CreateEventForm";
 import { EmployeeProvider } from "./context/EmployeeContext";
-import '../src/App.css'
 import PolicyDocumentDetail from "./screens/PolicyDocumentDetail";
 import OpenCases from "./screens/OpenCases";
 import OpenResponses from "./screens/OpenResponses";
 import TeamScreen from "./screens/TeamScreen";
-import Test from "./screens/Test";
+import '../src/App.css'
 
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
             <Route path="documents" element={<OpenResponses />}></Route>
             <Route path="policy/:id" element={<PolicyDocumentDetail />} />
             <Route path="myteam" element={<TeamScreen />}></Route>
-            <Route path="test" element={<Test />}></Route>
           </Routes>
         </Router>
       </PageLayout>

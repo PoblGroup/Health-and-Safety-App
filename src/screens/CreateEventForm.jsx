@@ -107,8 +107,8 @@ const CreateEventForm = () => {
     return (
         <>
             <AuthenticatedTemplate>
-                {eventCreated ? (
-                <>
+            {eventCreated ? 
+                (<>
                     <Alert variant="success">Your request was submitted successfully!</Alert>
                     <LinkContainer to='/cases'>
                         <Button variant="primary">Back to Cases</Button>
@@ -116,10 +116,9 @@ const CreateEventForm = () => {
                     <LinkContainer to='/cases-new'>
                         <Button variant="light">Select Another Form</Button>
                     </LinkContainer>
-                </>
-                ) : 
-                (
-                <>
+                </>) 
+                : 
+                (<>
                     <LinkContainer to='/cases-new'>
                         <Button variant="light" style={{ display: 'flex', alignItems: 'center' }}><BiArrowBack style={{fontSize: '1.1rem'}}/>&nbsp; Back</Button>
                     </LinkContainer>
@@ -148,11 +147,11 @@ const CreateEventForm = () => {
                                             onBlur={formik.handleBlur}
                                             disabled={eventCreated ? true : false}
                                         >
-                                            {/* {roles.map(option => {
+                                            {roles.map(option => {
                                                 return (
                                                     <option key={option.id} value={option.id} label={option.title} />
                                                 )
-                                            })} */}
+                                            })}
                                         </Form.Select>
                                         {formik.touched.jobRole && formik.errors.jobRole ? <p>{formik.errors.jobRole}</p> : null}
                                     </Form.Group>
@@ -172,25 +171,7 @@ const CreateEventForm = () => {
                                         {formik.errors.date ? <p>{formik.errors.date}</p> : null}
                                     </Form.Group>
                                 </Col>
-                                {/* <Col xs={12} md={6}>
-                                    <Form.Group className="mb-3" controlId="location">
-                                        <Form.Label>Location of the incident</Form.Label>
-                                        <Form.Select name="location" 
-                                            value={formik.values.location} 
-                                            onChange={formik.handleChange} 
-                                            onBlur={formik.handleBlur}
-                                            disabled={eventCreated ? true : false}
-                                        >
-                                            {locations.map(option => {
-                                                return (
-                                                    <option key={option.value} value={option.value} label={option.key} />
-                                                )
-                                            })}
-                                        </Form.Select>
-                                        {formik.touched.location && formik.errors.location ? <p>{formik.errors.location}</p> : null}
-                                    </Form.Group>
-                                </Col> */}
-                                    <Col xs={12} md={6}>
+                                <Col xs={12} md={6}>
                                     <Form.Group className="mb-3" controlId="location">
                                         <AutoComplete label={"Location of Incident"} name={"location"} suggestions={locations} formik={formik} />
                                     </Form.Group>
@@ -282,32 +263,13 @@ const CreateEventForm = () => {
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    {/* Affected Person */}
                                     <Row>
-                                        {/* <Col xs={12} md={4}>
-                                            <Form.Group className="mb-3" controlId="affectedPerson">
-                                                <Form.Label>Affected Person (Employee)</Form.Label>
-                                                <Form.Select name="affectedPerson" 
-                                                    value={formik.values.affectedPerson} 
-                                                    onChange={formik.handleChange} 
-                                                    onBlur={formik.handleBlur}
-                                                    disabled={eventCreated ? true : false}
-                                                >
-                                                    {employees.map(option => {
-                                                        return (
-                                                            <option key={option.value} value={option.value} label={option.key} />
-                                                        )
-                                                    })}
-                                                </Form.Select>
-                                                {formik.touched.affectedPerson && formik.errors.affectedPerson ? <p>{formik.errors.affectedPerson}</p> : null}
-                                            </Form.Group>
-                                        </Col> */}
-                                        <Col xs={12} md={6}>
+                                        <Col xs={12} md={4}>
                                             <Form.Group className="mb-3" controlId="affectedPerson">
                                                 <AutoComplete label={"Affected Person (Employee)"} name={"affectedPerson"} suggestions={employees} formik={formik} />
                                             </Form.Group>
                                         </Col>
-                                        <Col>
+                                        <Col xs={12} md={8}>
                                             <Form.Group className="mb-3" controlId="affectedPersonNotes">
                                                 <Form.Label>Affected Person (Notes)</Form.Label>
                                                 <Form.Control name="affectedPersonNotes" as="textarea" rows={4} 
@@ -332,8 +294,7 @@ const CreateEventForm = () => {
                         </Form>
                     </div>
                 </>
-                )}
-                
+            )}
             </AuthenticatedTemplate>
             <UnauthenticatedTemplate>
                 <h5>Seems your not signed in! Please sign in to create a new case.</h5>
