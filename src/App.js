@@ -12,6 +12,7 @@ import PolicyDocumentDetail from "./screens/PolicyDocumentDetail";
 import OpenCases from "./screens/OpenCases";
 import OpenResponses from "./screens/OpenResponses";
 import TeamScreen from "./screens/TeamScreen";
+import Test from "./screens/Test";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="documents" element={<OpenResponses />}></Route>
             <Route path="policy/:id" element={<PolicyDocumentDetail />} />
             <Route path="myteam" element={<TeamScreen />}></Route>
+            <Route path="test" element={<Test />}></Route>
           </Routes>
         </Router>
       </PageLayout>

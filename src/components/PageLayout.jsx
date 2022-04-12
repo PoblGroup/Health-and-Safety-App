@@ -9,7 +9,7 @@ const PageLayout = (props) => {
     // console.log(isAunthenticated)
     return (
         <>
-            <Navbar bg="primary" variant="dark" expand="lg">
+            <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
                 <Container>
                     <Navbar.Brand href="/">
                         <img
