@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Badge, Button, Col, Row } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
 import { GetCaseSingle } from '../data/cases'
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react'
@@ -12,6 +11,8 @@ const EventScreen = () => {
     const id = useParams().id
     const [caseSingle, setCaseSingle] = useState(null)
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         // const event = eventsData.filter(e => e.id === id)[0]
         async function GetCase(id) {
@@ -21,14 +22,11 @@ const EventScreen = () => {
         }
         GetCase(id)
     }, [id])
-    
 
     return (
         <>
             <AuthenticatedTemplate>
-                <LinkContainer to='/cases'>
-                    <Button variant="light" style={{ display: 'flex', alignItems: 'center' }}><BiArrowBack style={{fontSize: '1.1rem'}}/>&nbsp; Back</Button>
-                </LinkContainer>
+                <Button variant="light" onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center' }}><BiArrowBack style={{fontSize: '1.1rem'}}/>&nbsp; Back</Button>
                 <motion.div initial={{opacity: 0, y: 50}} animate={{opacity: 1, y: 0}} transition={{duration: 1}}>
                 {caseSingle &&
                     <div className="event__details">
@@ -87,7 +85,14 @@ const EventScreen = () => {
                         <Row xs={12} md={12} className="event__details-section">
                             <Col xs={12} md={12}>
                                 <h5>Investigation <span className='text-muted' style={{ fontSize: '14px'}}>(Manager)</span></h5>
-                                <p className='mt-3'>Content to be finalised...</p>
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <label>Date and Time</label>
+                                <p className="mt-3"><Moment date={caseSingle.investigationDate} format="dddd, MMMM Do YYYY" /></p>
+                            </Col>
+                            <Col xs={12} md={8}>
+                                <label>Findings/Notes</label>
+                                <p className="mt-3">{caseSingle.investigationFindings}</p>
                             </Col>
                         </Row>
                         {(caseSingle && caseSingle.actionType === 771570001) ? 

@@ -129,3 +129,56 @@ export const GetLookupValues = async () => {
         console.log('Error', error)
     }
 }
+
+export const GetTeamCases = async (id) => {
+    if (id) {
+        const token = await GetDynamicsToken()
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/hs/events/myteam?managerId=33580c82-b4c2-ec11-983e-000d3a875909`, requestOptions) 
+            const result = await response.json()
+            return result
+        } catch (error) {
+            console.log('Error', error)
+        }
+    }
+}
+
+export const UpdateCase = async (newCase) => {
+    const { outcome } = newCase;
+    const token = await GetDynamicsToken()
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
+
+    var data = JSON.stringify({
+        "eventFindings": newCase.eventFindings,
+        "investigationDate": newCase.investigationDate,
+        "outcome": (outcome != null) ? outcome : null
+    });
+
+    var requestOptions = {
+        method: 'PATCH',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow'
+      };
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/hs/events/${newCase.id}`, requestOptions)
+        const result = await response.json()
+        return result
+    } catch (error) {
+        console.log('Error', error)
+    }
+}

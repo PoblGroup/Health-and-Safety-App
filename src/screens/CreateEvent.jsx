@@ -7,9 +7,9 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-reac
 const CreateEvent = () => {
 
   const caseTypes = [
-    { id: 1, name: "Accident", description: "Create a form for an Accident you had"}, 
-    { id: 2, name: "Incident", description: "Create a form for an Incident you had"}, 
-    { id: 3, name: "Near Miss", description: "Create a form for a Near Miss"}, 
+    { id: 1, name: "Accident", description: "Event which results in injury or ill-health of people or catastrophic / serious property damage"}, 
+    { id: 2, name: "Incident", description: "Event that has caused or could have caused damage, death, injury or ill health to any person, property, or equipment"}, 
+    { id: 3, name: "Near Miss", description: "Event that results in no injury or damage but had the potential to do so, or where employees have felt threatened / vulnerable in a certain situation"}, 
   ]
 
   return (
@@ -19,7 +19,7 @@ const CreateEvent = () => {
               <Button variant="light" style={{ display: 'flex', alignItems: 'center' }}><BiArrowBack style={{fontSize: '1.1rem'}}/>&nbsp; Back</Button>
           </LinkContainer>
           <p className='mt-4'>Here you can create a new event from one of the options below:</p>
-          <Row xs={1} md={4} className="g-3 mt-2" >
+          <Row xs={1} md={3} className="g-3 mt-2" >
               {caseTypes && caseTypes.map((c, index) => (
                   <Col key={index}>
                   <Card>
