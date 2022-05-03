@@ -13,6 +13,8 @@ import OpenResponses from "./screens/OpenResponses";
 import TeamScreen from "./screens/TeamScreen";
 import '../src/App.css'
 import ManagerEventScreen from "./screens/ManagerEventScreen";
+import DiaryScreen from "./screens/DiaryScreen";
+import DiaryEntryDetail from "./screens/DiaryEntryDetail";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
             <Route path="policy/:id" element={<PolicyDocumentDetail />} />
             <Route path="myteam" element={<TeamScreen />}></Route>
             <Route path="myteam/cases/:id" element={<ManagerEventScreen />} />
+            <Route path="mydiary" element={<DiaryScreen />}></Route>
+            <Route path="mydiary/entry/:id" element={<DiaryEntryDetail />}></Route>
           </Routes>
         </Router>
       </PageLayout>

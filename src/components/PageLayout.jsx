@@ -27,6 +27,7 @@ const PageLayout = (props) => {
                                     <Nav.Link href="/cases">My Cases</Nav.Link>
                                     <Nav.Link href="/documents">Documents</Nav.Link>
                                     <Nav.Link href="/myteam">My Team</Nav.Link>
+                                    <Nav.Link href="/mydiary">My Diary</Nav.Link>
                                 </Nav>
                                 <SignOutButton/>
                             </Navbar.Collapse>

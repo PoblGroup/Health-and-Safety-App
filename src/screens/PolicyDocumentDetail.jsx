@@ -100,12 +100,12 @@ const PolicyDocumentDetail = () => {
                         <Col>
                             <ListGroup variant="flush">
                                 {policyResponse.files.length > 0 ? policyResponse.files.map(f => (
-                                <ListGroup.Item><a href={f.url} target="_blank"><BiFile />{' '}{f.name}</a></ListGroup.Item>
+                                <ListGroup.Item><a href={f.url} target="_blank" rel="noreferrer"><BiFile />{' '}{f.name}</a></ListGroup.Item>
                                 )) : <ListGroup.Item >No Documents Found.</ListGroup.Item>}
                             </ListGroup>
                         </Col>
                     </Row>
-                    {(confirmed.status == true) ? <Alert variant="success" className="mt-5"><strong>Thank You!</strong> - Policy Response Confirmed</Alert> :
+                    {(confirmed.status === true) ? <Alert variant="success" className="mt-5"><strong>Thank You!</strong> - Policy Response Confirmed</Alert> :
                     (!expired) ? <Row>
                         <Col xs={12} md={12}><h5 className='mt-4'>Confirmation</h5></Col>
                         <Col xs={12} md={12}><p>Please confirm that you have read all the attached documents above</p></Col>
