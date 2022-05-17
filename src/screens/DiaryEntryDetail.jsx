@@ -97,6 +97,12 @@ const DiaryEntryDetail = () => {
         if(updatedEntry.updated) { 
             setIsSubmitting(false)
             notify(updatedEntry.message)    
+
+            const navigateBack = () => {
+                navigate('/mydiary')
+            }
+
+            setTimeout(navigateBack, 6000);
         }
     }
 

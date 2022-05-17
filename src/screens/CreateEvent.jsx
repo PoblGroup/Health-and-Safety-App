@@ -8,7 +8,7 @@ const CreateEvent = () => {
 
   const caseTypes = [
     { id: 1, name: "Accident", description: "Event which results in injury or ill-health of people or catastrophic / serious property damage"}, 
-    { id: 2, name: "Incident", description: "Event that has caused or could have caused damage, death, injury or ill health to any person, property, or equipment"}, 
+    { id: 2, name: "Incident", description: "Event that has caused or could have caused damage to any property, or equipment"}, 
     { id: 3, name: "Near Miss", description: "Event that results in no injury or damage but had the potential to do so, or where employees have felt threatened / vulnerable in a certain situation"}, 
   ]
 
