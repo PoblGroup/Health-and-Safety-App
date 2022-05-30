@@ -72,9 +72,9 @@ header img svg {
   font-weight: 500;
 }
 
-.event__details-section {
+/* .event__details-section {
   padding: 3rem 0 0 0!important;
-}
+} */
 
 .navbar-brand {
   display: flex;
@@ -102,4 +102,15 @@ header img svg {
   width: 80px;
   height: auto; 
   margin: .75rem
+}
+
+.event-card {
+  border-radius: 5px;
+  box-shadow: 0px 3px 20px rgb(0 0 0 / 5%);
+  padding: 1.5rem;
+  margin: 3rem 0 !important;
+}
+
+.event-card h5 {
+  margin-bottom: 2rem;
 }

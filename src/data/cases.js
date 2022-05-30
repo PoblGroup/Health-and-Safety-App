@@ -192,3 +192,28 @@ export const UpdateCase = async (newCase) => {
         console.log('Error', error)
     }
 }
+
+export const UpdateCaseManagerInvestigation = async (investigationData) => {
+    const token = await GetDynamicsToken()
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
+
+    var data = JSON.stringify(investigationData);
+
+    var requestOptions = {
+        method: 'PATCH',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow'
+      };
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/hs/events/${investigationData.caseId}`, requestOptions)
+        const result = await response.json()
+        return result
+    } catch (error) {
+        console.log('Error', error)
+    }
+}
