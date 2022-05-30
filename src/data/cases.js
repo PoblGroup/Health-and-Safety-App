@@ -119,11 +119,21 @@ export const GetLookupValues = async () => {
         employees.push({ key: '', value: ''})
         result.employees.value.map(e => employees.push({ key: e.pobl_employeename, value: e.pobl_employeehsid}))
 
+        const witnessTypes = []
+        witnessTypes.push({ key: '', value: ''})
+        result.witnessTypes.map(e => witnessTypes.push({ key: e.witnessTypeName, value: e.witnessTypeId.toString()}))
+
+        const emergencyServices = []
+        emergencyServices.push({ key: '', value: ''})
+        result.emergencyServices.map(e => emergencyServices.push({ key: e.emergencyServiceName, value: e.emergencyServiceId.toString()}))
+
         return {
             categories,
             injuries,
             injuryParts,
-            employees
+            employees,
+            witnessTypes,
+            emergencyServices
         }
     } catch (error) {
         console.log('Error', error)
