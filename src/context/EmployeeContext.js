@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { GetEmployee } from '../data/employee'
 
 const EmployeeContext = React.createContext()

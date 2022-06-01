@@ -6,7 +6,8 @@ async function GetDynamicsToken() {
     };
 
     try {
-        const response = await fetch("http://localhost:5000/api/auth/dynamics", requestOptions)
+        const response = await fetch("https://poblgroup-dynamicsapi.azurewebsites.net/api/auth/dynamics", requestOptions)
+        // const response = await fetch("http://localhost:5000/api/auth/dynamics", requestOptions) 
         const result = await response.json()
         return result.access_token
     } catch (error) {

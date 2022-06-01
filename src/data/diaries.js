@@ -14,7 +14,7 @@ export const GetDiaryEntries = async (id) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:5000/api/hs/diary/entries?employeeId=${id}`, requestOptions)
+            const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/diary/entries?employeeId=${id}`, requestOptions)
             const result = await response.json()
             return result
         } catch (error) {
@@ -37,7 +37,7 @@ export const GetDiaryEntry = async (id) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:5000/api/hs/diary/entries/${id}`, requestOptions)
+            const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/diary/entries/${id}`, requestOptions)
             const result = await response.json()
             return result
         } catch (error) {
@@ -75,7 +75,7 @@ export const UpdateEntry = async (entry, completion) => {
       };
 
     try {
-        const response = await fetch(`http://localhost:5000/api/hs/diary/entries/${entry.id}`, requestOptions)
+        const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/diary/entries/${entry.id}`, requestOptions)
         const result = await response.json()
         return result
     } catch (error) {

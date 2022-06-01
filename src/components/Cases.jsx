@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Badge, Button, Card, Col, Row } from 'react-bootstrap'
+import { Badge, Card, Col, Row } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { GetCases } from '../data/cases'
-import { MdOutlinePersonalInjury } from 'react-icons/md'
 import Moment from 'react-moment'
 import { motion } from 'framer-motion'
 
@@ -15,15 +14,15 @@ const Cases = ({ employee }) => {
         async function FetchUserCases() {
             if(currentEmployee.pobl_employeehsid != null) {
                 const userCases = await GetCases(currentEmployee.pobl_employeehsid)
-                userCases.value.map(c => {
+                userCases.value.map(c => (
                     c.pobl_eventdateandtime = new Date(c.pobl_eventdateandtime)
-                })
+                ))
                 const sortedUserCases = userCases.value.slice().sort((a, b) => b.pobl_eventdateandtime - a.pobl_eventdateandtime)
                 setMyCases(sortedUserCases)
             }
         }
         FetchUserCases()
-    }, [employee])
+    }, [currentEmployee.pobl_employeehsid])
 
     return (
         <>
@@ -35,7 +34,6 @@ const Cases = ({ employee }) => {
                             <motion.div whileHover={{ scale: 1.025, boxShadow: "0px 0px 30px rgba(0,0,0,.05)", cursor: 'pointer' }}>
                             <Card style={{borderColor: 'rgba(0,0,0,.05)'}}>
                                 <Card.Body className="card__body">
-                                    {/* <MdOutlinePersonalInjury style={{ fontSize: '3rem', margin: '.5rem 0 1rem 0', color: '#E91E63'}} /> */}
                                     <img className="card__image" src="/accident.png" alt="" />
                                     <Card.Title>{c.pobl_casename}</Card.Title>
                                     <Card.Subtitle className="text-muted" style={{ margin: '5px 0', fontSize: '14px'}}>
@@ -44,12 +42,6 @@ const Cases = ({ employee }) => {
                                     <div style={{ margin: '10px 0' }}>
                                         <Badge pill style={{ marginRight: '.3rem', padding: '5px 10px'}} bg='primary'>{c.pobl_casetype}</Badge>
                                     </div>
-                                    {/* <Card.Text className="mt-2">
-                                        {(c.pobl_description.length > 200) ? c.pobl_description.slice(0, 100).concat('...') : c.pobl_description}
-                                    </Card.Text> */}
-                                    {/* <LinkContainer to={`/event/${c.pobl_eventid}`}>
-                                        <Button variant="light">View Details</Button>
-                                    </LinkContainer> */}
                                 </Card.Body>
                             </Card>
                             </motion.div>

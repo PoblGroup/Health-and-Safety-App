@@ -1,5 +1,4 @@
 import React from "react";
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 import PageLayout from "./components/PageLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./screens/Home";

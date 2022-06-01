@@ -126,16 +126,17 @@ const EventScreen = () => {
                                     </Col>   
                             </Row>
                         </div>
-                        <div className='event-card'>
+                        
                             {(caseSingle && caseSingle.actionType === 771570001) ? 
+                            <div className='event-card'>
                                 <Row xs={12} md={12} className="event__details-section">
                                     <Col xs={12} md={12}>
                                         <h5>Detailed Investigation <span className='text-muted' style={{ fontSize: '14px'}}>(Health & Safety)</span></h5>
                                         <p>To be discussed</p>
                                     </Col>
                                 </Row>
+                            </div>
                             : null}
-                        </div>
                     </div>
                 }
                 </motion.div>

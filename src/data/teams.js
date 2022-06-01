@@ -13,7 +13,7 @@ export const GetTeams = async () => {
     };
 
     try {
-        const response = await fetch(`http://localhost:5000/api/hs/events/teams`, requestOptions)
+        const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events/teams`, requestOptions)
         const result = await response.json()
         return result
     } catch (error) {
