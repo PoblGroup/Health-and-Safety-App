@@ -3,16 +3,15 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/
 import { useEmployee, useEmployeeFetch } from '../context/EmployeeContext';
 
 import PolicyResponses from '../components/PolicyResponses';
-import { Container } from 'react-bootstrap';
 
 const OpenResponses = () => {
-    const { instance, accounts } = useMsal();
+    const { accounts } = useMsal();
     const employee = useEmployee()
     const fetchEmployee = useEmployeeFetch()
 
     useEffect(() => {
         fetchEmployee(accounts[0].username)
-    }, [])
+    }, [accounts, fetchEmployee])
 
     return (
         <>

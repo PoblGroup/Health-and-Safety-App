@@ -2,7 +2,7 @@ import { useMsal } from '@azure/msal-react';
 import React, { useEffect } from 'react'
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useEmployee, useEmployeeFetch } from '../context/EmployeeContext';
+import { useEmployeeFetch } from '../context/EmployeeContext';
 import { motion } from 'framer-motion'
 
 const ProfileContent = () => {
