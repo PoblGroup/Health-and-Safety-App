@@ -13,7 +13,7 @@ export const GetEmployee = async (email) => {
     };
 
     try {
-        const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/employees/${email}`, requestOptions)
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/employees/${email}`, requestOptions)
         const result = await response.json()
         return result
     } catch (error) {

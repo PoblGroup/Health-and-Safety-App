@@ -14,7 +14,7 @@ export const GetCases = async (id) => {
         };
 
         try {
-            const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events?employeeId=${id}`, requestOptions)
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/events?employeeId=${id}`, requestOptions)
             // const response = await fetch(`http://localhost:5000/api/hs/events?employeeId=${id}`, requestOptions)
             const result = await response.json()
             return result
@@ -37,7 +37,7 @@ export const GetCaseSingle = async (id) => {
     };     
 
     try {
-        const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events/${id}`, requestOptions)
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/events/${id}`, requestOptions)
         // const response = await fetch(`http://localhost:5000/api/hs/events/${id}`, requestOptions)
         const result = await response.json()
         return result
@@ -81,7 +81,7 @@ export const CreateNewCase = async (formData, form) => {
     };
 
     try {
-        const response = await fetch("https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events", requestOptions)
+        const response = await fetch("${process.env.REACT_APP_API_URL}/hs/events", requestOptions)
         // const response = await fetch("http://localhost:5000/api/hs/events", requestOptions)
         const result = await response.json()
         return result
@@ -103,7 +103,7 @@ export const GetLookupValues = async () => {
     };
 
     try {
-        const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events/lookups`, requestOptions)
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/events/lookups`, requestOptions)
         // const response = await fetch(`http://localhost:5000/api/hs/events/lookups`, requestOptions)
         const result = await response.json()
 
@@ -158,7 +158,7 @@ export const GetTeamCases = async (id) => {
         };
 
         try {
-            const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events/myteam?managerId=33580c82-b4c2-ec11-983e-000d3a875909`, requestOptions) 
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/events/myteam?managerId=${id}`, requestOptions) 
             // const response = await fetch(`http://localhost:5000/api/hs/events/myteam?managerId=33580c82-b4c2-ec11-983e-000d3a875909`, requestOptions) 
             const result = await response.json()
             return result
@@ -190,7 +190,7 @@ export const UpdateCase = async (newCase) => {
       };
 
     try {
-        const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events/${newCase.id}`, requestOptions)
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/events/${newCase.id}`, requestOptions)
         // const response = await fetch(`http://localhost:5000/api/hs/events/${newCase.id}`, requestOptions)
         const result = await response.json()
         return result
@@ -216,7 +216,7 @@ export const UpdateCaseManagerInvestigation = async (investigationData) => {
       };
 
     try {
-        const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/events/${investigationData.caseId}`, requestOptions)
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/events/${investigationData.caseId}`, requestOptions)
         // const response = await fetch(`http://localhost:5000/api/hs/events/${investigationData.caseId}`, requestOptions)
         const result = await response.json()
         return result

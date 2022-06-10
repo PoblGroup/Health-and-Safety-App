@@ -14,7 +14,7 @@ export const GetPolicyResponses = async (id) => {
         };
 
         try {
-            const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/policyresponses?employeeId=${id}`, requestOptions)
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/policyresponses?employeeId=${id}`, requestOptions)
             const result = await response.json()
             return result
         } catch (error) {
@@ -37,7 +37,7 @@ export const GetPolicyResponse = async (id) => {
         };
 
         try {
-            const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/policyresponses/${id}`, requestOptions)
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/policyresponses/${id}`, requestOptions)
             const result = await response.json()
             return result
         } catch (error) {
@@ -60,7 +60,7 @@ export const ConfirmResponse = async (id) => {
         };
 
         try {
-            const response = await fetch(`https://poblgroup-dynamicsapi.azurewebsites.net/api/hs/policyresponses/${id}`, requestOptions)
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/policyresponses/${id}`, requestOptions)
             const result = await response.json()
             return result
         } catch (error) {
