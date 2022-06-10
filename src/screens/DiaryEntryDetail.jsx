@@ -11,14 +11,14 @@ const DiaryEntryDetail = () => {
     const id = useParams().id
     const [entryResponse, setEntryResponse] = useState(null)
     const [entryResponseError, setEntryResponseError] = useState(null)
-    const [expired, setExpired] = useState(false)
+    const [expired] = useState(false)
     const [loading, setLoading] = useState(true)
-    const [isError, setIsError] = useState(false)
+    // const [isError, setIsError] = useState(false)
     const [areasCovered, setAreasCovered] = useState("");
     const [areasRemaining, setAreasRemaining] = useState("");
     const [completionNotes, setCompletionNotes] = useState("")
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [confirmed, setConfirmed] = useState({ status: false, message: ""})
+    const [confirmed] = useState({ status: false, message: ""})
 
     const navigate = useNavigate();
 

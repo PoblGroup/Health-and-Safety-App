@@ -7,7 +7,7 @@ import { useEmployee, useEmployeeFetch } from '../context/EmployeeContext';
 import { GetDiaryEntries } from '../data/diaries';
 
 const DiaryScreen = () => {
-    const { instance, accounts } = useMsal();
+    const { accounts } = useMsal();
     const employee = useEmployee()
     const fetchEmployee = useEmployeeFetch()
 
@@ -29,7 +29,7 @@ const DiaryScreen = () => {
             }
         }
         FetchEntries()
-    }, [])
+    }, [accounts, currentEmployee.pobl_employeehsid, fetchEmployee])
 
     // useEffect(() => {
         

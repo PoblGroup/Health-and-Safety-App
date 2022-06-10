@@ -1,7 +1,6 @@
 import React from 'react'
 import { useIsAuthenticated } from '@azure/msal-react'
 import SignOutButton from './SignOutButton'
-import SignInButton from './SignInButton'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 
 const PageLayout = (props) => {

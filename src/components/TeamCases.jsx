@@ -15,8 +15,11 @@ const TeamCases = ({ employee }) => {
                 let empCases = [];
                 const cases = await GetTeamCases(currentEmployee.pobl_employeehsid)
                 if(cases != null) {
+                    // eslint-disable-next-line array-callback-return
                     cases.map(c => {
-                        if(c.events.length > 0) empCases.push(c)
+                        if(c.events.length > 0) {
+                            return empCases.push(c)
+                        }
                     })
                     console.log(empCases)
                     setTeamCases(empCases)

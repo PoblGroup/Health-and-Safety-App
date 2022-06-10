@@ -81,7 +81,7 @@ export const CreateNewCase = async (formData, form) => {
     };
 
     try {
-        const response = await fetch("${process.env.REACT_APP_API_URL}/hs/events", requestOptions)
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/hs/events`, requestOptions)
         // const response = await fetch("http://localhost:5000/api/hs/events", requestOptions)
         const result = await response.json()
         return result

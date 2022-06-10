@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Badge, Button, Card, Col, Row, Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { GetCases } from '../data/cases'
-import { MdOutlinePersonalInjury } from 'react-icons/md'
 import Moment from 'react-moment'
-import { motion } from 'framer-motion'
 import { GetPolicyResponses } from '../data/policies'
 
 const PolicyResponses = ({employee}) => {
@@ -22,7 +19,7 @@ const PolicyResponses = ({employee}) => {
             }
         }
         FetchPolicyResponses()
-    }, [employee])
+    }, [employee, currentEmployee.pobl_employeehsid])
 
   return (
       <>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Badge, Button, Col, Form, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
-import { GetCaseSingle, GetLookupValues, UpdateCase, UpdateCaseManagerInvestigation } from '../data/cases'
+import { GetCaseSingle, GetLookupValues, UpdateCaseManagerInvestigation } from '../data/cases'
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react'
 import { motion } from 'framer-motion'
 import { ToastContainer, toast } from 'react-toastify';
@@ -19,7 +19,7 @@ const ManagerEventScreen = () => {
     const [caseSingle, setCaseSingle] = useState(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(true)
-    const [showNextActions, setShowNextActions] = useState(false)
+    // const [showNextActions, setShowNextActions] = useState(false)
     const [employees, setEmployees] = useState([])
     const [witnessTypes, setWitnessTypes] = useState([])
     const [emergencyServices, setEmergencyServices] = useState([])
@@ -51,7 +51,7 @@ const ManagerEventScreen = () => {
             } else {
                 // setInvestigationDate("")
             }
-            if((caseSingleDetail.investigationFindings != null) && (caseSingleDetail.investigationDate != null)) setShowNextActions(true)
+            // if((caseSingleDetail.investigationFindings != null) && (caseSingleDetail.investigationDate != null)) setShowNextActions(true)
             setSubmitted(false)
         }
         if(submitted) GetCase(id)

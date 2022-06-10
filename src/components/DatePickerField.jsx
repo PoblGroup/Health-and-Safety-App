@@ -10,7 +10,7 @@ const DatePickerField = ({label, name, value, onChange, eventCreated}) => {
         <DatePicker 
             className='form-control'
             dateFormat="dd/MM/yyyy HH:mm"
-            selected={( value && new Date(value) || null )}
+            selected={( (value && new Date(value)) || null )}
             onChange={val => onChange(name, val)}
             showTimeSelect
             timeFormat="HH:mm"

@@ -1,17 +1,13 @@
-import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
+import { useMsal } from '@azure/msal-react';
 import React, { useEffect } from 'react'
-import { Button, Tab, Tabs } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useEmployee, useEmployeeFetch } from '../context/EmployeeContext';
 import { motion } from 'framer-motion'
 
-import hsImg from "../assets/hs.svg"
-
-
 const ProfileContent = () => {
-    const { instance, accounts } = useMsal();
+    const { accounts } = useMsal();
     const name = accounts[0] && accounts[0].name
-    const employee = useEmployee()
     const fetchEmployee = useEmployeeFetch()
 
     const svgVariants = {
@@ -24,7 +20,7 @@ const ProfileContent = () => {
 
     useEffect(() => {
         fetchEmployee(accounts[0].username)
-    }, [])
+    }, [accounts, fetchEmployee])
     
 
     return (

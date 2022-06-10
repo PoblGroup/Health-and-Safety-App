@@ -1,8 +1,6 @@
 import React from 'react'
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 import Dashboard from '../components/Dashboard'
-import { LinkContainer } from 'react-router-bootstrap';
-import { Button } from 'react-bootstrap';
 import { motion } from 'framer-motion'
 import SignInButton from '../components/SignInButton';
 
