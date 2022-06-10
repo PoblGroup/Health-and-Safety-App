@@ -29,6 +29,7 @@ const ProfileContent = () => {
 
     return (
         <>
+            {console.log(process.env.REACT_APP_TEST)}
             <header>
                 <h4>Hey! {name}</h4>
                 <p className='mt-3'>Welcome to the new Health & Safety Reporting App! <br/> Where you can submit new cases and sign any policy documents.</p>

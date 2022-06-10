@@ -14,15 +14,17 @@ const TeamCases = ({ employee }) => {
             if(currentEmployee.pobl_employeehsid != null) {
                 let empCases = [];
                 const cases = await GetTeamCases(currentEmployee.pobl_employeehsid)
-                cases.map(c => {
-                    if(c.events.length > 0) empCases.push(c)
-                })
-                console.log(empCases)
-                setTeamCases(empCases)
+                if(cases != null) {
+                    cases.map(c => {
+                        if(c.events.length > 0) empCases.push(c)
+                    })
+                    console.log(empCases)
+                    setTeamCases(empCases)
+                }
             }
         }
-        FetchTeamCases()
-    }, [employee, currentEmployee.pobl_employeehsid])
+        if(manager) FetchTeamCases()
+    }, [employee, currentEmployee.pobl_employeehsid, manager])
 
     
 
@@ -40,9 +42,9 @@ const TeamCases = ({ employee }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {teamCases && teamCases.map((c, index) => (
+                    {teamCases.length > 0 ? teamCases.map((c) => (
                         c.events.map((e, i) => (
-                            <tr key={index}>    
+                            <tr key={i}>    
                                 <td width={200}>{c.employeeName}</td>
                                 <td width={200}>{e.pobl_casename}</td>
                                 <td>{e.pobl_description}</td>
@@ -50,7 +52,8 @@ const TeamCases = ({ employee }) => {
                                 <td><LinkContainer to={`/myteam/cases/${e.pobl_eventid}`}><Button variant='light'>View</Button></LinkContainer></td>
                             </tr>
                         ))
-                    ))}
+                    )) : <tr><td colSpan={5}>No Team Cases Found</td></tr>
+                    }
                 </tbody>
             </Table>
             : 
